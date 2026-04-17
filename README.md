@@ -1,45 +1,40 @@
-# uiao-gos — Governance OS for Enterprise Directory Migration
+# uiao-gos — dissolved into WhalerMike/uiao
 
-**Universal governance platform for AD to Entra ID and M365 migration.**
-Not government-specific. Identity-first. No rip-and-replace.
+> **This repository has been dissolved.** `uiao-gos` was never a
+> firewalled commercial product; the federal/commercial firewall
+> doctrine was retired by
+> [ADR-028](https://github.com/WhalerMike/uiao/blob/main/core/canon/adr/adr-028-monorepo-consolidation-gos-integration.md)
+> on 2026-04-17. The directory-migration work that lived here is
+> now part of the consolidated substrate at
+> [`WhalerMike/uiao`](https://github.com/WhalerMike/uiao).
+>
+> Full history was preserved via `git subtree`. No content was lost —
+> it was redistributed to its canonical home.
 
-## The Problem
-Active Directory was not just an identity store. It was the implicit governance
-model for every network service in your enterprise: DNS, DHCP, PKI, RADIUS,
-LDAP authentication, GPO device policy, file services, and trust relationships.
+## Where everything went
 
-Entra ID flattened the identity hierarchy but left all of that infrastructure
-without a governance model. Microsoft gave you the tools. Nobody gave you
-the framework for what decisions to make with those tools.
+| What was in `uiao-gos` | Where it lives now |
+|---|---|
+| BlueCat Address Manager adapter | Registry entry `bluecat-address-manager` in [`uiao/core/canon/modernization-registry.yaml`](https://github.com/WhalerMike/uiao/blob/main/core/canon/modernization-registry.yaml); implementation scaffold at [`uiao/impl/src/uiao_impl/adapters/ipam/bluecat/`](https://github.com/WhalerMike/uiao/tree/main/impl/src/uiao_impl/adapters/ipam/bluecat) |
+| Infoblox NIOS adapter | Registry entry `infoblox-nios` in [`uiao/core/canon/modernization-registry.yaml`](https://github.com/WhalerMike/uiao/blob/main/core/canon/modernization-registry.yaml); implementation scaffold at [`uiao/impl/src/uiao_impl/adapters/ipam/infoblox/`](https://github.com/WhalerMike/uiao/tree/main/impl/src/uiao_impl/adapters/ipam/infoblox) |
+| Directory-migration narrative | [`uiao/docs/narrative/governance-os-directory-migration.md`](https://github.com/WhalerMike/uiao/blob/main/docs/narrative/governance-os-directory-migration.md) |
+| Address governance comic | [`uiao/docs/publications/series-assets/UIAO-Address-Governance-Flow.jpg`](https://github.com/WhalerMike/uiao/blob/main/docs/publications/series-assets/UIAO-Address-Governance-Flow.jpg) |
+| Five-phase modernization model | Folded into ADR-028 and [`uiao/core/canon/modernization-registry.yaml`](https://github.com/WhalerMike/uiao/blob/main/core/canon/modernization-registry.yaml) |
+| Roadmap adapters (users, GPOs, DNS, DHCP, PKI, RADIUS, Kerberos) | Future-work items in [`uiao/core/canon/modernization-registry.yaml`](https://github.com/WhalerMike/uiao/blob/main/core/canon/modernization-registry.yaml); not yet implemented |
 
-gos is that framework.
+## Why dissolved
 
-## What gos Governs
-Not just users. Every object AD was holding together:
-- Users, computers, service accounts
-- Security groups and GPOs
-- DNS, DHCP, and IPAM (InfoBlox / BlueCat)
-- PKI / Certificate Services
-- RADIUS / 802.1X / VPN authentication
-- LDAP-dependent applications
-- Kerberos SPNs and application registrations
-- Cross-domain and cross-forest trust relationships
+`uiao-gos` was originally scoped as a firewalled commercial module
+outside the federal substrate. That doctrine did not survive
+contact with the actual adapter taxonomy: every adapter in `uiao-gos`
+is a **modernization adapter** with `class: modernization` and
+`mission-class: integration`, which is exactly the slot already
+defined in
+[`modernization-registry.yaml`](https://github.com/WhalerMike/uiao/blob/main/core/canon/modernization-registry.yaml).
+ADR-028 retired the firewall and folded the content into the
+consolidated substrate.
 
-## The Five Phases
-1. Discover  — complete governance inventory of what AD actually encodes
-2. Normalize — rationalize decades of organic growth into a clean authority model
-3. Map       — translate X.500/LDAP governance into Entra ID equivalents
-4. Migrate   — execute with continuous validation
-5. Validate  — prove governance continuity with evidence
+## This repo is now read-only
 
-## Built On
-UIAO's Eight Core Concepts — proven in federal civilian compliance under
-FedRAMP Moderate, Zero Trust mandates, and TIC 3.0.
-For the enterprise, it's easier.
-
-## Related Repositories
-- uiao-core: Federal reference architecture and compliance canon
-- uiao-docs: Architectural narrative and strategic documentation
-
-## License
-Apache 2.0 — see LICENSE
+No new commits will land here. File issues and open PRs against
+[`WhalerMike/uiao`](https://github.com/WhalerMike/uiao).
